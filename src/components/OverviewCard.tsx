@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 import { SparklineChart } from './charts/SparklineChart';
@@ -32,7 +31,7 @@ export const OverviewCard: React.FC<OverviewCardProps> = ({
             <p className="text-2xl font-bold text-gray-900 dark:text-white">{value}</p>
           </div>
         </div>
-        <div className="w-24">
+        <div className="w-24 overflow-hidden">
           <SparklineChart data={sparklineData} />
         </div>
       </div>

@@ -1,5 +1,5 @@
-
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const orders = [
   {
@@ -86,7 +86,12 @@ export const OrdersTable: React.FC = () => {
             {orders.map((order) => (
               <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
-                  {order.id}
+                  <Link 
+                    to={`/orders/${order.id}`}
+                    className="hover:text-[color:var(--theme-600)] transition-colors cursor-pointer"
+                  >
+                    {order.id}
+                  </Link>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
                   {order.customer}

@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import me from '../images/me.jpg'; // Adjust the path as necessary
 import { 
   Bell, 
   Search, 
@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Sidebar } from './Sidebar';
+import { NotificationDropdown } from './NotificationDropdown';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -23,8 +24,10 @@ interface DashboardLayoutProps {
 export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
   const { darkMode, toggleDarkMode } = useTheme();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const getPageTitle = () => {
     const path = location.pathname;
@@ -41,7 +44,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200 flex">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div 
@@ -52,9 +55,9 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
 
       {/* Sidebar */}
       <div className={`
-        fixed inset-y-0 left-0 z-30 transition-all duration-300 ease-in-out
+        fixed inset-y-0 left-0 z-30 transition-all duration-300 ease-in-out lg:sticky lg:top-0 lg:h-screen
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
-        lg:translate-x-0 lg:static lg:inset-0
+        lg:translate-x-0 lg:relative lg:inset-0
         ${sidebarCollapsed ? 'lg:w-16' : 'lg:w-64'}
       `}>
         <Sidebar 
@@ -64,10 +67,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
       </div>
 
       {/* Main content */}
-      <div className={`
-        flex-1 flex flex-col min-h-screen transition-all duration-300
-        ${sidebarCollapsed ? 'lg:ml-16' : 'lg:ml-64'}
-      `}>
+      <div className="flex-1 flex flex-col min-h-screen transition-all duration-300">
         {/* Header */}
         <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3 sticky top-0 z-10 transition-colors duration-200">
           <div className="flex items-center justify-between">
@@ -113,20 +113,29 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
               </button>
 
               {/* Notifications */}
-              <button className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors relative">
-                <Bell className="w-5 h-5" />
-                <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
-              </button>
+              <div className="relative">
+                <button 
+                  onClick={() => setNotificationsOpen(!notificationsOpen)}
+                  className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors relative"
+                >
+                  <Bell className="w-5 h-5" />
+                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+                </button>
+                <NotificationDropdown 
+                  isOpen={notificationsOpen} 
+                  onClose={() => setNotificationsOpen(false)} 
+                />
+              </div>
 
               {/* User menu */}
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 p-1 rounded-lg transition-colors" onClick={() => navigate('/profile')}>
                 <img
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face"
+                  src={me}
                   alt="User"
                   className="w-8 h-8 rounded-full"
                 />
                 <div className="hidden md:block">
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">John Doe</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">Salah Tabet</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">Admin</p>
                 </div>
               </div>

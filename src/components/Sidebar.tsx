@@ -1,6 +1,6 @@
-
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import me from '../images/me.jpg'; 
 import { 
   Settings,
   Package,
@@ -27,6 +27,8 @@ const navigation = [
 ];
 
 export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onClose }) => {
+  const navigate = useNavigate();
+
   return (
     <div className={`
       h-full bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 
@@ -79,15 +81,15 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onClose }) => {
       {/* User info at bottom */}
       {!collapsed && (
         <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors" onClick={() => navigate('/profile')}>
             <img
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face"
+              src={me}
               alt="User"
               className="w-10 h-10 rounded-full"
             />
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 dark:text-white truncate">John Doe</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 truncate">john@example.com</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-white truncate">Salah Tabet</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 truncate">salaheddinetabet05@gmail.com</p>
             </div>
           </div>
         </div>

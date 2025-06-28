@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { 
   DollarSign, 
@@ -18,9 +17,9 @@ import { TopCustomers } from '@/components/TopCustomers';
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Overview Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 sm:gap-6">
         <OverviewCard
           title="Total Sales"
           value="$124,563"
@@ -66,15 +65,21 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-        <SalesChart />
-        <CategoriesChart />
-        <RevenueChart />
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+        <div className="lg:col-span-1">
+          <SalesChart />
+        </div>
+        <div className="lg:col-span-1">
+          <CategoriesChart />
+        </div>
+        <div className="lg:col-span-2 xl:col-span-1">
+          <RevenueChart />
+        </div>
       </div>
 
       {/* Tables and Customer Info */}
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-        <div className="xl:col-span-2 space-y-6">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6">
+        <div className="xl:col-span-2 space-y-4 sm:space-y-6">
           <OrdersTable />
           <ProductsTable />
         </div>

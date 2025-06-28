@@ -1,5 +1,5 @@
-
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const products = [
   {
@@ -9,7 +9,7 @@ const products = [
     price: '$999',
     unitsSold: 145,
     rating: 4.8,
-    image: 'https://images.unsplash.com/photo-1592179900008-f4d2c02d17ae?w=64&h=64&fit=crop',
+    image: 'https://imgs.search.brave.com/B9nw2m5R21HilWZ2C0kDKcIU19huHNs7zjcvfGPGmxs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93aXJl/bGVzc3pvbmUuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDIz/LzA5L2lQaG9uZTE1/UHJvLTc3NngxMDI0/LnBuZw',
   },
   {
     id: 2,
@@ -88,9 +88,12 @@ export const ProductsTable: React.FC = () => {
                       className="w-10 h-10 rounded-lg object-cover"
                     />
                     <div>
-                      <p className="text-sm font-medium text-gray-900 dark:text-white">
+                      <Link 
+                        to={`/products/${product.id}`}
+                        className="text-sm font-medium text-gray-900 dark:text-white hover:text-[color:var(--theme-600)] transition-colors cursor-pointer"
+                      >
                         {product.name}
-                      </p>
+                      </Link>
                     </div>
                   </div>
                 </td>

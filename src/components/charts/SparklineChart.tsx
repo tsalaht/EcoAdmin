@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface SparklineChartProps {
@@ -23,7 +22,7 @@ export const SparklineChart: React.FC<SparklineChartProps> = ({
   }).join(' ');
 
   return (
-    <svg width="100%" height={height} className="overflow-visible">
+    <svg width="100%" height={height} className="overflow-hidden">
       <polyline
         fill="none"
         stroke={color}
